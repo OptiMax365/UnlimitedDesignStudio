@@ -11,12 +11,11 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;height:100%;overflow:hidden;background:#0b0f0c;
 font-family:system-ui,-apple-system,"Segoe UI",Arial,Helvetica,sans-serif;overscroll-behavior:none}
-:root{--hdr:calc(92px + env(safe-area-inset-top,0px));--stb:calc(30px + env(safe-area-inset-bottom,0px));--acc:#00e5ff}
-button,select,input{font-family:inherit;touch-action:manipulation}
+:root{--hdr:calc(96px + env(safe-area-inset-top,0px));--stb:calc(30px + env(safe-area-inset-bottom,0px));--acc:#00e5ff}
+button,select,input,textarea{font-family:inherit;touch-action:manipulation}
 button{user-select:none;-webkit-user-select:none;cursor:pointer}
 canvas{-webkit-touch-callout:none}
 
-/* ===== HEADER ===== */
 #hdr{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;flex-direction:column;gap:6px;
 padding:calc(env(safe-area-inset-top,0px) + 6px) 8px 7px;
 background:linear-gradient(180deg,#071a2e,#04101d);border-bottom:1px solid rgba(0,229,255,.28);
@@ -24,14 +23,13 @@ box-shadow:0 8px 24px rgba(0,0,0,.55)}
 #row1{display:flex;gap:6px;align-items:center;height:38px}
 .brand{flex:0 0 auto;font-size:12px;font-weight:800;letter-spacing:.5px;white-space:nowrap;
 background:linear-gradient(90deg,#00e5ff,#ff3df2,#ffee00);-webkit-background-clip:text;background-clip:text;color:transparent}
-.inp{flex:1;min-width:0;height:38px;padding:0 12px;border-radius:11px;border:1px solid #1d4a5a;
-background:#04141f;color:#eaf7fc;font-size:14px}
-.inp:focus{outline:none;border-color:var(--acc);box-shadow:0 0 10px rgba(0,229,255,.35)}
 .hbtn{flex:0 0 auto;height:38px;min-width:40px;padding:0 10px;border-radius:11px;border:1px solid #1d4a5a;
 background:#0a1e2a;color:#dff4fb;font-size:14px;font-weight:700}
 .hbtn:active{transform:scale(.94)}
 .hbtn.on{background:#00788c;border-color:var(--acc);color:#fff;box-shadow:0 0 12px rgba(0,229,255,.5)}
 .hbtn.gen{background:linear-gradient(180deg,#00788c,#00596b);border-color:#00c8e0}
+.hbtn.mic{background:linear-gradient(180deg,#8c005a,#5a0038);border-color:#ff3df2}
+.hbtn.search{background:linear-gradient(180deg,#7c4dff,#4527a0);border-color:#b39ddb}
 #chips{display:flex;align-items:center;gap:6px;height:38px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none}
 #chips::-webkit-scrollbar{display:none}
 .chip{flex:0 0 auto;height:34px;padding:0 12px;border-radius:10px;border:1px solid #1d4a5a;background:#04141f;
@@ -45,7 +43,6 @@ label.chk{cursor:pointer}
 label.chk input{accent-color:var(--acc);width:15px;height:15px}
 .cdiv{flex:0 0 auto;width:1px;height:24px;background:#1d4a5a;margin:0 3px}
 
-/* ===== PAGES / CARDS ===== */
 .page{position:fixed;left:0;right:0;top:var(--hdr);bottom:var(--stb);overflow-y:auto;
 -webkit-overflow-scrolling:touch;padding:12px;display:none}
 .page.on{display:block}
@@ -67,7 +64,6 @@ justify-content:center;border:1px solid #1d4a5a;background:#0a1e2a;color:#dff4fb
 background:rgba(0,229,255,.08);color:#7ce8ff;font-size:13px;font-weight:800;letter-spacing:1px}
 .more:active{background:rgba(0,229,255,.18)}
 
-/* ===== PREVIEW / INFINITE ===== */
 .fs{position:fixed;left:0;right:0;top:var(--hdr);bottom:var(--stb);background:#020407;
 display:none;align-items:center;justify-content:center}
 .fs.on{display:flex}
@@ -80,6 +76,24 @@ font-size:17px;font-weight:800}
 .pbtn:active{transform:scale(.93)}
 .hint{position:absolute;left:50%;transform:translateX(-50%);top:8px;color:rgba(124,232,255,.65);
 font-size:11px;pointer-events:none;white-space:nowrap;max-width:96vw;overflow:hidden;text-overflow:ellipsis}
+
+/* ===== VOICE PAGE ===== */
+#pgVoice{flex-direction:column;align-items:stretch;justify-content:flex-start;overflow:hidden}
+#vTop{display:flex;align-items:center;gap:8px;padding:10px 12px 4px;flex-shrink:0}
+#vBack{width:44px;height:44px;font-size:15px}
+#vTitle{flex:1;color:#7ce8ff;font-weight:800;letter-spacing:1px;font-size:12px;
+white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#vTimer{color:#9fd8e8;font-size:12px;font-variant-numeric:tabular-nums;flex:0 0 auto}
+#vTranscript{margin:6px 12px;min-height:64px;max-height:120px;overflow-y:auto;background:rgba(0,229,255,.06);
+border:1px solid rgba(0,229,255,.25);border-radius:12px;padding:10px 12px;color:#eaf7fc;font-size:15px;line-height:1.45;flex-shrink:0}
+#vScroll{flex:1;overflow-y:auto;padding:10px 12px 110px;-webkit-overflow-scrolling:touch}
+#vHint{color:rgba(124,232,255,.55);font-size:12px;text-align:center;padding:14px 8px}
+#vMic{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(18px + env(safe-area-inset-bottom,0px));
+width:64px;height:64px;border-radius:50%;border:3px solid rgba(255,255,255,.35);
+background:radial-gradient(circle,#ff3df2,#c0009a);color:#fff;font-size:26px;z-index:5;
+box-shadow:0 6px 26px rgba(255,61,242,.55)}
+#vMic.listening{animation:vpulse 1.2s infinite}
+@keyframes vpulse{0%,100%{box-shadow:0 0 0 0 rgba(255,61,242,.65)}50%{box-shadow:0 0 0 20px rgba(255,61,242,0)}}
 
 /* ===== SPEED DIALS ===== */
 .od{position:absolute;z-index:5;opacity:.35;backdrop-filter:blur(3px);touch-action:none;transition:opacity .2s}
@@ -101,16 +115,32 @@ background:rgba(10,30,40,.35);border:1px solid rgba(0,229,255,.5);display:none}
 #oHH{position:absolute;top:5px;bottom:5px;left:4px;width:54px;border-radius:10px;background:rgba(0,229,255,.6);
 box-shadow:0 0 14px #00e5ff;transition:left .25s}
 
-/* ============================================================
-   FABRIC EDITOR OVERLAY — full-screen mobile editor per design
-   ============================================================ */
+/* ===== TOPMOST DRAGGABLE / RESIZABLE TEXT CARD ===== */
+#txtCard{position:fixed;z-index:5000;left:8px;top:calc(var(--hdr) + 6px);width:min(92vw,430px);height:220px;
+background:rgba(4,16,29,.96);border:1px solid rgba(0,229,255,.5);border-radius:16px;
+box-shadow:0 12px 44px rgba(0,0,0,.65),0 0 20px rgba(0,229,255,.15);
+display:flex;flex-direction:column;backdrop-filter:blur(8px)}
+#txtCard.hidden{display:none}
+#tcHead{display:flex;align-items:center;gap:8px;padding:8px 10px;cursor:grab;touch-action:none;
+border-bottom:1px solid rgba(0,229,255,.25)}
+#tcHead:active{cursor:grabbing}
+#tcHead .t{font-size:11px;font-weight:800;color:#7ce8ff;letter-spacing:1px;flex:1;pointer-events:none}
+.tcbtn{width:30px;height:30px;border-radius:8px;border:1px solid #1d4a5a;background:#0a1e2a;color:#dff4fb;font-size:13px}
+#txtArea{flex:1;background:transparent;border:none;outline:none;color:#eaf7fc;font-size:16px;line-height:1.5;
+padding:10px 12px;resize:none;user-select:text;-webkit-user-select:text;touch-action:auto}
+#txtArea::placeholder{color:#5d8496}
+#tcResize{position:absolute;right:2px;bottom:2px;width:36px;height:36px;display:flex;align-items:center;
+justify-content:center;color:#7ce8ff;font-size:15px;cursor:nwse-resize;touch-action:none}
+
+/* ===== FABRIC EDITOR ===== */
 #edOv{position:fixed;inset:0;background:#f0f2f5;z-index:1000;display:none;flex-direction:column}
 #edOv.on{display:flex}
 .ed-topbar{background:linear-gradient(135deg,#025f3b 0%,#037a4d 100%);color:#fff;
 padding:calc(env(safe-area-inset-top,0px) + 6px) 8px 6px;box-shadow:0 2px 12px rgba(0,0,0,.2);
 display:flex;flex-direction:column;gap:5px;flex-shrink:0}
 .ed-row1{display:flex;align-items:center;gap:8px;height:36px}
-.ed-title{font-weight:800;font-size:13px;letter-spacing:.5px;flex:0 0 auto;white-space:nowrap}
+.ed-title{font-weight:800;font-size:13px;letter-spacing:.5px;flex:0 0 auto;white-space:nowrap;
+max-width:44vw;overflow:hidden;text-overflow:ellipsis}
 .ed-tools{display:flex;gap:5px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;height:38px;align-items:center}
 .ed-tools::-webkit-scrollbar{display:none}
 .ed-btn{flex:0 0 auto;height:36px;padding:0 11px;border-radius:10px;border:none;
@@ -120,6 +150,7 @@ white-space:nowrap;display:flex;align-items:center;justify-content:center;gap:4p
 .ed-btn.danger{background:linear-gradient(135deg,#e74c3c,#c0392b)}
 .ed-btn.pri{background:linear-gradient(135deg,#3498db,#2980b9)}
 .ed-btn.close{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3)}
+.ed-btn.lbl{background:rgba(255,255,255,.1);cursor:default;color:rgba(255,255,255,.85)}
 .ed-color{position:relative;width:36px;height:36px;border-radius:10px;border:2px solid rgba(255,255,255,.4);
 background:linear-gradient(135deg,#667eea,#764ba2);flex:0 0 auto;overflow:hidden}
 .ed-color input{position:absolute;width:200%;height:200%;opacity:0;top:-50%;left:-50%;cursor:pointer}
@@ -140,17 +171,15 @@ background:linear-gradient(135deg,#00d67a,#00b366);color:#0a1a12;padding:7px 22p
 font-size:12px;font-weight:700;cursor:grab;box-shadow:0 4px 16px rgba(0,214,122,.4);z-index:15;
 white-space:nowrap;user-select:none;display:flex;align-items:center;gap:6px;touch-action:none}
 .ed-handle::before{content:"⋮";font-size:14px;letter-spacing:1px}
-.ed-handle:active{cursor:grabbing;background:linear-gradient(135deg,#00b366,#009955)}
 .ed-status{background:#04101d;color:#8fb8c8;padding:6px 14px;font-size:11px;
 display:flex;justify-content:space-between;align-items:center;flex-shrink:0;
 border-top:1px solid #0d2a38;min-height:30px}
 .ed-status span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-/* ===== TOAST ===== */
 #toast{position:fixed;left:50%;transform:translateX(-50%) translateY(20px);
-bottom:calc(100px + env(safe-area-inset-bottom,0px));background:rgba(0,229,255,.95);color:#00131a;
+bottom:calc(110px + env(safe-area-inset-bottom,0px));background:rgba(0,229,255,.95);color:#00131a;
 font-weight:800;font-size:13px;padding:10px 18px;border-radius:999px;opacity:0;pointer-events:none;
-transition:.25s;z-index:120;white-space:nowrap;max-width:92vw;overflow:hidden;text-overflow:ellipsis}
+transition:.25s;z-index:6000;white-space:nowrap;max-width:92vw;overflow:hidden;text-overflow:ellipsis}
 #toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 #status{position:fixed;bottom:0;left:0;right:0;height:var(--stb);
 padding:0 12px env(safe-area-inset-bottom,0px);background:#04101d;border-top:1px solid #0d2a38;color:#8fb8c8;
@@ -163,9 +192,9 @@ display:flex;justify-content:space-between;align-items:center;font-size:11px;z-i
 <div id="hdr">
   <div id="row1">
     <span class="brand">🎨 THESIGNNAL ∞</span>
-    <input id="txt" class="inp" placeholder="Type or 🎤 speak your text…">
+    <button id="btnShowTxt" class="hbtn search" title="Show text card">🔍</button>
     <button id="btnPara" class="hbtn" title="New line">¶</button>
-    <button id="btnMic" class="hbtn" title="Voice">🎤</button>
+    <button id="btnMic" class="hbtn mic" title="Voice Studio">🎤</button>
     <button id="btnGen" class="hbtn gen" title="Generate 12">✨12</button>
   </div>
   <div id="chips">
@@ -191,6 +220,16 @@ display:flex;justify-content:space-between;align-items:center;font-size:11px;z-i
     <select id="selSpeed" class="chip"><option value="1000">1s</option><option value="2000" selected>2s</option><option value="3000">3s</option></select>
     <label class="chip chk"><input id="chkIdle" type="checkbox">Idle3s</label>
   </div>
+</div>
+
+<!-- TOPMOST DRAGGABLE / RESIZABLE TEXT CARD -->
+<div id="txtCard">
+  <div id="tcHead">
+    <span class="t">✍️ ENTER TEXT — drag to move, resize at ⇲</span>
+    <button class="tcbtn" id="tcHide" title="Hide card">—</button>
+  </div>
+  <textarea id="txtArea" placeholder="Type your text here… see it all at once. Line breaks = new lines." enterkeyhint="done"></textarea>
+  <div id="tcResize" title="Resize">⇲</div>
 </div>
 
 <div class="page on" id="pgAll"><p class="phead" id="hAll"></p><div class="grid" id="gAll"></div><button class="more" id="moreAll">✨ GENERATE 12 MORE — MIXED</button></div>
@@ -219,7 +258,19 @@ display:flex;justify-content:space-between;align-items:center;font-size:11px;z-i
   <div id="oH" class="od"><div id="oHH"></div></div>
 </div>
 
-<!-- ============ FABRIC EDITOR OVERLAY ============ -->
+<!-- VOICE STUDIO PAGE -->
+<div class="fs" id="pgVoice">
+  <div id="vTop">
+    <button class="pbtn" id="vBack">✕</button>
+    <span id="vTitle">🎤 VOICE STUDIO — speak & watch designs appear</span>
+    <span id="vTimer">0.0s</span>
+  </div>
+  <div id="vTranscript">Tap the big pink mic and speak… your words write themselves live, and designs generate infinitely as you talk.</div>
+  <div id="vScroll"><div class="grid" id="gVoice"></div><div id="vHint">🎤 Tap the mic to begin</div></div>
+  <button id="vMic">🎤</button>
+</div>
+
+<!-- FABRIC EDITOR OVERLAY -->
 <div id="edOv">
   <div class="ed-topbar">
     <div class="ed-row1">
@@ -230,19 +281,19 @@ display:flex;justify-content:space-between;align-items:center;font-size:11px;z-i
       <button class="ed-btn" id="edExport">⬇ Export</button>
     </div>
     <div class="ed-tools">
-      <span class="ed-btn" style="background:rgba(255,255,255,.1);cursor:default;color:rgba(255,255,255,.85)">Add</span>
+      <span class="ed-btn lbl">Add</span>
       <button class="ed-btn" id="edAddText">✏️ Text</button>
       <button class="ed-btn" id="edAddRect">▭ Rect</button>
       <button class="ed-btn" id="edAddCirc">◯ Circ</button>
       <button class="ed-btn" id="edAddTri">△ Tri</button>
       <button class="ed-btn" id="edAddImg">🖼️ Image</button>
-      <span class="ed-btn" style="background:rgba(255,255,255,.1);cursor:default;color:rgba(255,255,255,.85)">Actions</span>
+      <span class="ed-btn lbl">Actions</span>
       <button class="ed-btn" id="edPan">🖐️ Pan</button>
       <button class="ed-btn danger" id="edDel">🗑️ Del</button>
       <button class="ed-btn" id="edUp">⬆️ Up</button>
       <button class="ed-btn" id="edDown">⬇️ Dn</button>
       <button class="ed-btn" id="edCenter">⊙ Cntr</button>
-      <span class="ed-btn" style="background:rgba(255,255,255,.1);cursor:default;color:rgba(255,255,255,.85)">Text</span>
+      <span class="ed-btn lbl">Text</span>
       <select class="ed-select" id="edFont">
         <option value="Arial">Arial</option><option value="Helvetica">Helvetica</option>
         <option value="Verdana">Verdana</option><option value="Georgia">Georgia</option>
@@ -253,12 +304,12 @@ display:flex;justify-content:space-between;align-items:center;font-size:11px;z-i
       </select>
       <input type="number" class="ed-num" id="edFontSize" value="48" min="8" max="400">
       <div class="ed-color" title="Text color"><input type="color" id="edTextColor" value="#ffffff"></div>
-      <span class="ed-btn" style="background:rgba(255,255,255,.1);cursor:default;color:rgba(255,255,255,.85)">Shape</span>
+      <span class="ed-btn lbl">Shape</span>
       <div class="ed-color" title="Fill"><input type="color" id="edFill" value="#4CAF50"></div>
       <div class="ed-color" title="Stroke"><input type="color" id="edStroke" value="#000000"></div>
-      <span class="ed-btn" style="background:rgba(255,255,255,.1);cursor:default;color:rgba(255,255,255,.85)">Zoom</span>
+      <span class="ed-btn lbl">Zoom</span>
       <button class="ed-btn" id="edZoomOut" style="padding:0 12px">−</button>
-      <span class="ed-btn" id="edZoomDisp" style="background:rgba(255,255,255,.1);cursor:default;padding:0 10px">100%</span>
+      <span class="ed-btn lbl" id="edZoomDisp" style="padding:0 10px">100%</span>
       <button class="ed-btn" id="edZoomIn" style="padding:0 12px">+</button>
       <button class="ed-btn" id="edZoomReset" style="padding:0 10px">↺</button>
       <button class="ed-btn" id="edResetAll" style="background:linear-gradient(135deg,#e67e22,#d35400)">↺ Reset</button>
@@ -278,13 +329,13 @@ display:flex;justify-content:space-between;align-items:center;font-size:11px;z-i
 
 <div id="toast"></div>
 <div id="status"><span id="statusL"></span><span id="statusM">1080 × 1920</span><span id="statusR"></span></div>
-
 <input type="file" id="edImgInput" accept="image/*" style="display:none">
 
 <script>
 'use strict';
 const $=id=>document.getElementById(id);
 const buzz=ms=>{try{if(navigator.vibrate)navigator.vibrate(ms)}catch(e){}};
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 let toastT=null;
 function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(toastT);
  toastT=setTimeout(()=>t.classList.remove('on'),1700)}
@@ -416,7 +467,7 @@ function drawBG(ctx,d,r,W,H){
  ctx.globalAlpha=1;
 }
 
-/* ============ LAYOUT + RENDER ============ */
+/* ============ LAYOUT + RENDER (bgOnly flag prevents doubling in editor) ============ */
 function computeLayout(ctx,d,text,W,H){
  try{ctx.letterSpacing=d.ls+'px'}catch(e){}
  const margin=Math.round(W*0.09),maxW=W-margin*2;
@@ -451,6 +502,8 @@ function renderDesign(canvas,d,text,k,opts){
  const ctx=canvas.getContext('2d');
  ctx.save();ctx.scale(k,k);
  drawBG(ctx,d,mulberry32(d.bgSeed),W,H);
+ /* ✅ bgOnly: render background only, no text → prevents doubling in editor */
+ if(opts.bgOnly){ctx.restore();if(opts.geom)d._geom={k,geom:[]};return}
  const blocks=computeLayout(ctx,d,text,W,H);
  ctx.textBaseline='top';
  const geom=[];
@@ -467,10 +520,6 @@ function renderDesign(canvas,d,text,k,opts){
   b.words.forEach((t,wi)=>{
    const ww=b.wordWs[wi]*o.s;
    const col=d.ov.words[bi+':'+wi]||(d.colorMode==='word'?d.scheme.fg[wi%d.scheme.fg.length]:b.color);
-   if(opts.sel&&opts.sel.bi===bi&&opts.sel.wi===wi){
-    ctx.save();ctx.shadowBlur=0;ctx.shadowColor='transparent';
-    ctx.fillStyle='rgba(0,229,255,.30)';ctx.fillRect(cx-8,y-8,ww+16,size+16);ctx.restore();
-   }
    if(d.effect==='retro'){ctx.fillStyle=d.scheme.fg[(wi+1)%d.scheme.fg.length];ctx.fillText(t,cx+size*0.06,y+size*0.06)}
    ctx.fillStyle=col;ctx.fillText(t,cx,y);
    if(d.effect==='glow')ctx.fillText(t,cx,y);
@@ -478,15 +527,19 @@ function renderDesign(canvas,d,text,k,opts){
     ctx.strokeStyle=(d.scheme.light&&d.bgType!=='existence')?'#000':'#fff';ctx.strokeText(t,cx,y)}
    wRects.push({x:cx,y,w:ww,h:size,t:t,col:col});cx+=ww+sp;
   });
-  geom.push({x:x0,y,w:lineW,h:size,words:wRects,bi,text:b.words,fontSize:size,font:fontStr(d,size)});
-  if(opts.sel&&opts.sel.bi===bi){
-   ctx.shadowBlur=0;ctx.shadowColor='transparent';
-   ctx.strokeStyle='#00e5ff';ctx.lineWidth=4;ctx.setLineDash([14,9]);
-   ctx.strokeRect(x0-16,y-16,lineW+32,size+32);ctx.setLineDash([]);
-  }
+  geom.push({x:x0,y,w:lineW,h:size,words:wRects});
  });
  ctx.restore();
  if(opts.geom)d._geom={k,geom};
+}
+function renderDesignForExport(canvas,d){
+ const W=state.W,H=state.H;canvas.width=W;canvas.height=H;
+ const ctx=canvas.getContext('2d');
+ renderDesign(canvas,d,state.text,1,{});
+ if(d._fabricJSON){
+  const tmp=document.createElement('canvas');tmp.width=W;tmp.height=H;
+  loadFabricToCanvas(tmp,d._fabricJSON,W,H,()=>{ctx.drawImage(tmp,0,0)});
+ }
 }
 
 /* ============ CARDS / PAGES ============ */
@@ -539,7 +592,7 @@ function setPage(f){
  if(pg)$(pg).classList.add('on');
  ['btnAll','btnPattern','btnStruct','btnFill','btnExist'].forEach(b=>$(b).classList.remove('on'));
  $({all:'btnAll',pattern:'btnPattern',structural:'btnStruct',fill:'btnFill',existence:'btnExist'}[f]).classList.add('on');
- state.view='grid';$('pgPreview').classList.remove('on');$('pgInfinite').classList.remove('on');
+ state.view='grid';$('pgPreview').classList.remove('on');$('pgInfinite').classList.remove('on');$('pgVoice').classList.remove('on');
  updatePtool();setStatus();
 }
 
@@ -548,7 +601,7 @@ function openPreview(d,edit){
  if(state.infinite)stopInf(false);
  state.view='preview';
  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
- $('pgInfinite').classList.remove('on');$('pgPreview').classList.add('on');
+ $('pgInfinite').classList.remove('on');$('pgVoice').classList.remove('on');$('pgPreview').classList.add('on');
  const list=filteredList();const i=list.indexOf(d);state.index=i>=0?i:0;
  state.edit=false;state.sel=null;state.selWord=null;
  renderPreview();updatePtool();buzz(8);
@@ -563,7 +616,7 @@ function renderPreview(){
  const box=$('pgPreview');
  const k=Math.max(0.02,Math.min((box.clientWidth-10)/state.W,(box.clientHeight-96)/state.H));
  const cv=$('pvCanvas');
- renderDesign(cv,d,state.text,k,{geom:true,sel:state.sel!=null?{bi:state.sel,wi:state.selWord}:null});
+ renderDesign(cv,d,state.text,k,{geom:true});
  cv.style.width=(state.W*k)+'px';cv.style.height=(state.H*k)+'px';
  setStatus();
 }
@@ -585,20 +638,8 @@ function download(d){
   setTimeout(()=>URL.revokeObjectURL(u),4000);toast('⬇ Saved '+fname(d))},'image/png')}
  else{save(cv.toDataURL('image/png'));toast('⬇ Saved '+fname(d))}
 }
-/* Export render: base design + fabric overlay if edited */
-function renderDesignForExport(canvas,d){
- const W=state.W,H=state.H;
- canvas.width=W;canvas.height=H;
- const ctx=canvas.getContext('2d');
- renderDesign(canvas,d,state.text,1,{});
- if(d._fabricJSON){
-  /* Re-compose fabric objects on top at full res */
-  const tmp=document.createElement('canvas');tmp.width=W;tmp.height=H;
-  loadFabricToCanvas(tmp,d._fabricJSON,W,H,()=>{ctx.drawImage(tmp,0,0)});
- }
-}
 
-/* ============ FABRIC EDITOR ============ */
+/* ============ FABRIC EDITOR (bgOnly prevents text doubling) ============ */
 let edCanvas=null,edWrap=null,edZoom=1,edPan={x:0,y:0},edDragMode=false,edDesign=null;
 const isMobile=/Android|webOS|iPhone|iPad|iPod/i.test(navigator.userAgent)||window.innerWidth<=767;
 function launchFabricEditor(d){
@@ -629,26 +670,26 @@ function initFabricEditor(d){
  });
  edWrap=$('edWrap');edWrap.style.width=W+'px';edWrap.style.height=H+'px';
 
- /* 1. Render the base design as a background image */
+ /* ✅ Render background ONLY (no text) to avoid doubling */
  const baseCanvas=document.createElement('canvas');
- renderDesign(baseCanvas,d,state.text,1,{});
+ renderDesign(baseCanvas,d,state.text,1,{bgOnly:true});
  const bgDataURL=baseCanvas.toDataURL('image/png');
 
- /* 2. Load existing fabric objects OR create text layers from layout */
  if(d._fabricJSON){
   edCanvas.loadFromJSON(d._fabricJSON,()=>{
    edCanvas.renderAll();applyFabricTransform();updateFabricInfo();
    setTimeout(fitCanvasToWorkspace,80);
   });
  }else{
-  /* First-time edit: build base image + editable text layers */
+  /* First-time edit: bg image + editable text layers (NO doubling!) */
   fabric.Image.fromURL(bgDataURL,function(img){
    img.set({left:0,top:0,scaleX:1,scaleY:1,selectable:false,evented:false,
     lockMovementX:true,lockMovementY:true,hoverCursor:'default'});
    edCanvas.add(img);edCanvas.sendToBack(img);
 
-   /* Add each text line as an editable IText */
-   const blocks=computeLayout(baseCanvas.getContext('2d'),d,state.text,W,H);
+   /* Compute layout to place text layers correctly */
+   const tmpCtx=baseCanvas.getContext('2d');
+   const blocks=computeLayout(tmpCtx,d,state.text,W,H);
    blocks.forEach((b,bi)=>{
     const o=d.ov.blocks[bi]||{dx:0,dy:0,s:1};
     let x0=d.align==='center'?(W-b.lineW)/2:Math.round(W*0.09);
@@ -658,10 +699,9 @@ function initFabricEditor(d){
      left:x0,top:y,fontSize:b.size*o.s,fontFamily:d.family,
      fontWeight:d.weight,fill:b.color,
      cornerSize:isMobile?22:14,selectable:true,evented:true,
-     name:'line_'+bi,
-     charSpacing:d.ls*10
+     name:'line_'+bi,charSpacing:d.ls*10
     });
-    /* Per-word colors via char-by-char */
+    /* Per-word colors */
     let charIdx=0;const styles={};
     b.words.forEach((word,wi)=>{
      const col=d.ov.words[bi+':'+wi]||(d.colorMode==='word'?d.scheme.fg[wi%d.scheme.fg.length]:b.color);
@@ -681,7 +721,6 @@ function initFabricEditor(d){
   },{crossOrigin:'anonymous'});
  }
 
- /* Wire events */
  edCanvas.on('selection:created',updateFabricInfo);
  edCanvas.on('selection:updated',updateFabricInfo);
  edCanvas.on('selection:cleared',updateFabricInfo);
@@ -732,7 +771,6 @@ function updateFabricInfo(){
  }else{$('edSelInfo').textContent='No object selected — tap anything to edit'}
 }
 
-/* ===== Fabric tool actions ===== */
 function edAddText(){
  const center=getEdCenter();
  const t=new fabric.IText('Edit me',{left:center.x,top:center.y,originX:'center',originY:'center',
@@ -761,9 +799,7 @@ function edAddTri(){
   originX:'center',originY:'center',cornerSize:isMobile?22:14});
  edCanvas.add(tr);edCanvas.setActiveObject(tr);edCanvas.requestRenderAll();
 }
-function edAddImg(){
- $('edImgInput').click();
-}
+function edAddImg(){$('edImgInput').click()}
 $('edImgInput').addEventListener('change',e=>{
  const file=e.target.files[0];
  if(!file||!file.type.match('image.*'))return;
@@ -819,24 +855,19 @@ function edApplyStroke(){
  edCanvas.getActiveObjects().forEach(o=>{if(o.type!=='i-text'&&o.type!=='group')o.set('stroke',c)});
  edCanvas.requestRenderAll();
 }
-
-/* Save: serialize fabric JSON back to design + update thumbnails */
 function edSave(){
  if(!edCanvas||!edDesign)return;
  edDesign._fabricJSON=edCanvas.toJSON();
- /* Re-render thumbnails including fabric edits */
  state.designs.slice(-80).forEach(d=>{
   if(d===edDesign){d._cards.forEach(cv=>{
    if(cv._done){
     const tmp=document.createElement('canvas');
-    renderDesign(tmp,d,state.text,0.22,{});
-    /* Compose fabric overlay */
+    renderDesign(tmp,d,state.text,0.22,{bgOnly:true});
     loadFabricToCanvas(tmp,d._fabricJSON,state.W,state.H,()=>{
      const ctx=cv.getContext('2d');
      ctx.clearRect(0,0,cv.width,cv.height);
      const sx=cv.width/state.W,sy=cv.height/state.H;
      ctx.save();ctx.scale(sx,sy);
-     /* Draw base bg */
      drawBG(ctx,d,mulberry32(d.bgSeed),state.W,state.H);
      ctx.restore();
      ctx.drawImage(tmp,0,0,cv.width,cv.height);
@@ -853,7 +884,6 @@ function edExport(){
  download(edDesign);
 }
 
-/* Pan / drag / gestures */
 let edPanState={active:false,lx:0,ly:0,sx:0,sy:0};
 let edHandleState={active:false,lx:0,ly:0,sx:0,sy:0};
 function startEdPan(e){
@@ -910,7 +940,6 @@ function toggleEdPan(){
  buzz(8);toast(edDragMode?'Pan mode on':'Select mode on');
 }
 
-/* Wire editor buttons */
 $('edCancel').onclick=()=>{closeFabricEditor()};
 $('edSave').onclick=()=>{edSave()};
 $('edExport').onclick=()=>{edExport()};
@@ -935,7 +964,6 @@ $('edZoomIn').onclick=()=>setFabricZoom(edZoom*1.25);
 $('edZoomOut').onclick=()=>setFabricZoom(edZoom/1.25);
 $('edZoomReset').onclick=()=>{edZoom=1;edPan={x:0,y:0};applyFabricTransform();updateFabricInfo()};
 
-/* Workspace pan wiring */
 const ws=$('edWorkspace');
 ws.addEventListener('mousedown',startEdPan);
 ws.addEventListener('touchstart',startEdPan,{passive:false});
@@ -945,7 +973,6 @@ document.addEventListener('mouseup',endEdPan);
 document.addEventListener('touchend',endEdPan);
 document.addEventListener('touchcancel',endEdPan);
 
-/* Handle wiring */
 const eh=$('edHandle');
 eh.addEventListener('mousedown',startEdHandle);
 eh.addEventListener('touchstart',startEdHandle,{passive:false});
@@ -955,7 +982,6 @@ document.addEventListener('mouseup',endEdHandle);
 document.addEventListener('touchend',endEdHandle);
 document.addEventListener('touchcancel',endEdHandle);
 
-/* Pinch zoom */
 let pinch={active:false,d0:0,z0:1};
 function edDist(t1,t2){return Math.hypot(t1.clientX-t2.clientX,t1.clientY-t2.clientY)}
 ws.addEventListener('touchstart',e=>{
@@ -970,7 +996,6 @@ ws.addEventListener('touchend',()=>{pinch.active=false});
 ws.addEventListener('wheel',e=>{if(e.ctrlKey||e.metaKey){e.preventDefault();
  setFabricZoom(edZoom*(e.deltaY>0?0.9:1.1))}},{passive:false});
 
-/* Ctrl+D / delete */
 document.addEventListener('keydown',e=>{
  if(!$('edOv').classList.contains('on'))return;
  if(e.key==='Escape'){closeFabricEditor()}
@@ -987,7 +1012,7 @@ function startInf(){
  state.infinite=true;$('btnInf').classList.add('on');buzz(12);
  state.view='infinite';
  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
- $('pgPreview').classList.remove('on');$('pgInfinite').classList.add('on');updatePtool();
+ $('pgPreview').classList.remove('on');$('pgVoice').classList.remove('on');$('pgInfinite').classList.add('on');updatePtool();
  if(!filteredList().length)generate(12);
  state.index=filteredList().length-1;updateDialUI();renderInfinite();loop();
  toast(state.pageFilter==='all'?'∞ infinite: mixed makes':'∞ infinite: generating '+state.pageFilter.toUpperCase());
@@ -1052,31 +1077,224 @@ function tick(){state.boost=Math.max(state.boostMin,state.boost+(state.boostMin-
  requestAnimationFrame(tick)}
 requestAnimationFrame(tick);
 
-/* ============ VOICE ============ */
-let rec=null,listening=false,liveT=null;
-function setupRec(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return null;
- const r=new SR();r.continuous=true;r.interimResults=true;r.lang='en-US';
- r.onresult=e=>{let fin='',inter='';for(const res of e.results){if(res.isFinal)fin+=res[0].transcript.trim()+'\n';else inter+=res[0].transcript}
-  state.text=(fin+inter).trim();$('txt').value=state.text;
-  if(!liveT)liveT=setTimeout(()=>{liveT=null;rerenderThumbs();
-   if(state.view==='preview')renderPreview();if(state.view==='infinite')renderInfinite()},300)};
- r.onend=()=>{if(listening){listening=false;$('btnMic').classList.remove('on');
-  if(state.text){generate(12);toast('🎤 voice → +12 designs')}}};
- r.onerror=()=>{listening=false;$('btnMic').classList.remove('on')};return r}
-$('btnMic').onclick=()=>{
- if(listening){listening=false;if(rec)rec.stop();return}
- if(!rec)rec=setupRec();
- if(!rec){alert('Voice needs Chrome/Edge/Samsung Internet. Typing still works!');return}
- listening=true;$('btnMic').classList.add('on');buzz(12);try{rec.start()}catch(e){}};
+/* ============ TOPMOST DRAGGABLE / RESIZABLE TEXT CARD ============ */
+let tcPos=null;
+function clampTxtCard(){
+ const card=$('txtCard');
+ const w=card.offsetWidth,h=card.offsetHeight;
+ const vw=window.innerWidth,vh=window.innerHeight;
+ let left=parseFloat(card.style.left)||8;
+ let top=parseFloat(card.style.top)||(parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--hdr'))+6);
+ left=clamp(left,0,vw-w);
+ top=clamp(top,0,vh-h);
+ card.style.left=left+'px';
+ card.style.top=top+'px';
+}
+$('txtArea').value=state.text;
+$('txtArea').addEventListener('input',e=>{
+ state.text=e.target.value;
+ clearTimeout(typeT);typeT=setTimeout(()=>{rerenderThumbs();
+  if(state.view==='preview')renderPreview();
+  if(state.view==='infinite')renderInfinite()},450);
+});
+$('tcHide').onclick=()=>{$('txtCard').classList.add('hidden');buzz(8);toast('Text card hidden — tap 🔍 to show')};
+$('btnShowTxt').onclick=()=>{
+ $('txtCard').classList.remove('hidden');clampTxtCard();buzz(8);
+ $('txtArea').focus();toast('🔍 Text card shown');
+};
+$('btnPara').onclick=()=>{
+ $('txtCard').classList.remove('hidden');clampTxtCard();
+ const ta=$('txtArea');
+ const start=ta.selectionStart,end=ta.selectionEnd;
+ ta.value=ta.value.slice(0,start)+'\n'+ta.value.slice(end);
+ state.text=ta.value;
+ ta.selectionStart=ta.selectionEnd=start+1;
+ ta.focus();
+ clearTimeout(typeT);typeT=setTimeout(()=>{rerenderThumbs();
+  if(state.view==='preview')renderPreview();
+  if(state.view==='infinite')renderInfinite()},300);
+};
 
-/* ============ WIRING ============ */
+/* Drag the text card */
+let tcDrag=null;
+$('tcHead').addEventListener('pointerdown',e=>{
+ if(e.target.closest('.tcbtn'))return;
+ const card=$('txtCard');
+ tcDrag={sx:e.clientX,sy:e.clientY,ox:parseFloat(card.style.left)||8,oy:parseFloat(card.style.top)||100};
+ $('tcHead').setPointerCapture(e.pointerId);
+});
+$('tcHead').addEventListener('pointermove',e=>{
+ if(!tcDrag)return;
+ const dx=e.clientX-tcDrag.sx,dy=e.clientY-tcDrag.sy;
+ const card=$('txtCard');
+ const vw=window.innerWidth,vh=window.innerHeight;
+ const w=card.offsetWidth,h=card.offsetHeight;
+ const newLeft=clamp(tcDrag.ox+dx,0,vw-w);
+ const newTop=clamp(tcDrag.oy+dy,0,vh-h);
+ card.style.left=newLeft+'px';
+ card.style.top=newTop+'px';
+});
+$('tcHead').addEventListener('pointerup',()=>{tcDrag=null});
+$('tcHead').addEventListener('pointercancel',()=>{tcDrag=null});
+
+/* Resize the text card */
+let tcResize=null;
+$('tcResize').addEventListener('pointerdown',e=>{
+ const card=$('txtCard');
+ tcResize={sx:e.clientX,sy:e.clientY,ow:card.offsetWidth,oh:card.offsetHeight};
+ $('tcResize').setPointerCapture(e.pointerId);
+ e.stopPropagation();
+});
+$('tcResize').addEventListener('pointermove',e=>{
+ if(!tcResize)return;
+ const dx=e.clientX-tcResize.sx,dy=e.clientY-tcResize.sy;
+ const card=$('txtCard');
+ const vw=window.innerWidth,vh=window.innerHeight;
+ const left=parseFloat(card.style.left)||8;
+ const top=parseFloat(card.style.top)||100;
+ const newW=clamp(tcResize.ow+dx,200,vw-left);
+ const newH=clamp(tcResize.oh+dy,140,vh-top);
+ card.style.width=newW+'px';
+ card.style.height=newH+'px';
+});
+$('tcResize').addEventListener('pointerup',()=>{tcResize=null});
+$('tcResize').addEventListener('pointercancel',()=>{tcResize=null});
+
+/* ============ VOICE STUDIO PAGE ============ */
+let voiceRec=null,voiceListening=false,voiceStartT=0,voiceTimer=null,voiceGenInterval=null,voiceLiveT=null;
+function setupVoiceRec(){
+ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+ if(!SR)return null;
+ const r=new SR();r.continuous=true;r.interimResults=true;r.lang='en-US';
+ r.onresult=e=>{
+  let fin='',inter='';
+  for(const res of e.results){
+   if(res.isFinal)fin+=res[0].transcript.trim()+'\n';
+   else inter+=res[0].transcript;
+  }
+  const newText=(fin+inter).trim();
+  if(newText!==state.text){
+   state.text=newText;
+   $('txtArea').value=state.text;
+   $('vTranscript').textContent=state.text||'(listening...)';
+   /* Live-update existing thumbs */
+   if(!voiceLiveT)voiceLiveT=setTimeout(()=>{
+    voiceLiveT=null;
+    rerenderThumbs();
+    if(state.view==='preview')renderPreview();
+    if(state.view==='infinite')renderInfinite();
+   },250);
+  }
+ };
+ r.onend=()=>{
+  if(voiceListening){
+   /* Auto-restart (continuous mode sometimes drops) */
+   try{r.start()}catch(e){voiceListening=false}
+  }
+ };
+ r.onerror=e=>{
+  console.warn('Voice error:',e.error);
+  if(e.error==='not-allowed'){
+   toast('⚠️ Mic access denied — please allow in browser settings');
+   voiceListening=false;
+  }
+ };
+ return r;
+}
+function startVoice(){
+ /* Request mic permission explicitly first for better UX */
+ if(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia){
+  navigator.mediaDevices.getUserMedia({audio:true}).then(stream=>{
+   stream.getTracks().forEach(t=>t.stop()); /* we don't keep the stream, just the permission */
+   doStartVoice();
+  }).catch(err=>{
+   toast('⚠️ Mic permission denied: '+err.message);
+  });
+ }else{doStartVoice()}
+}
+function doStartVoice(){
+ if(!voiceRec)voiceRec=setupVoiceRec();
+ if(!voiceRec){toast('❌ Voice not supported on this browser');return}
+ voiceListening=true;
+ voiceStartT=performance.now();
+ $('vMic').classList.add('listening');
+ try{voiceRec.start()}catch(e){}
+ voiceTimer=setInterval(()=>{
+  const t=((performance.now()-voiceStartT)/1000).toFixed(1);
+  $('vTimer').textContent=t+'s';
+ },100);
+ /* Generate new designs continuously while speaking */
+ voiceGenInterval=setInterval(()=>{
+  if(!state.text)return;
+  const force=state.pageFilter!=='all'?state.pageFilter:undefined;
+  const d=createDesign((Math.random()*4294967295)>>>0,force);
+  state.designs.push(d);
+  /* Add only to voice grid (for infinite stream effect) */
+  addVoiceCard(d);
+  updateHeads();setStatus();
+  /* Auto-scroll voice grid */
+  const scr=$('vScroll');if(scr)scr.scrollTop=scr.scrollHeight;
+ },800);
+ $('vHint').textContent='🎤 Listening... designs generate & update as you speak';
+ buzz(15);toast('🎤 Voice active — speak!');
+}
+function stopVoice(){
+ voiceListening=false;
+ if(voiceRec)try{voiceRec.stop()}catch(e){}
+ clearInterval(voiceTimer);voiceTimer=null;
+ clearInterval(voiceGenInterval);voiceGenInterval=null;
+ $('vMic').classList.remove('listening');
+ $('vTimer').textContent='0.0s';
+ $('vHint').textContent='🎤 Tap the mic to begin again';
+ buzz(10);toast('🎤 Voice stopped — designs saved');
+}
+function addVoiceCard(d){
+ const card=document.createElement('div');card.className='card';
+ const wrap=document.createElement('div');wrap.className='cwrap';
+ wrap.style.aspectRatio=state.W+'/'+state.H;
+ const cv=document.createElement('canvas');cv._d=d;cv._done=true;
+ const tag=document.createElement('div');tag.className='tag';tag.textContent=formula(d);
+ wrap.appendChild(cv);wrap.appendChild(tag);
+ const bar=document.createElement('div');bar.className='cbar';
+ const dl=document.createElement('button');dl.className='cbtn dl';dl.innerHTML='⬇&nbsp;Save';
+ dl.addEventListener('click',e=>{e.stopPropagation();download(d)});
+ const ed=document.createElement('button');ed.className='cbtn ed';ed.innerHTML='✎&nbsp;Edit';
+ ed.addEventListener('click',e=>{e.stopPropagation();openPreview(d,true)});
+ bar.appendChild(dl);bar.appendChild(ed);
+ card.appendChild(wrap);card.appendChild(bar);
+ wrap.addEventListener('click',()=>openPreview(d,false));
+ $('gVoice').appendChild(card);
+ renderDesign(cv,d,state.text,0.22);
+ d._cards.push(cv);
+}
+function openVoicePage(){
+ if(state.infinite)stopInf(false);
+ state.view='voice';
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
+ $('pgPreview').classList.remove('on');$('pgInfinite').classList.remove('on');
+ $('pgVoice').classList.add('on');
+ $('vTranscript').textContent=state.text||'Tap the big pink mic and speak…';
+ setStatus();
+ /* Auto-start voice on enter */
+ setTimeout(()=>{
+  if(!voiceListening)startVoice();
+ },400);
+}
+function closeVoicePage(){
+ stopVoice();
+ setPage('all');
+}
+
+$('btnMic').onclick=()=>{openVoicePage()};
+$('vBack').onclick=()=>{closeVoicePage()};
+$('vMic').onclick=()=>{
+ if(voiceListening)stopVoice();else startVoice();
+};
+
+/* ============ VOICE END ============ */
+
+/* ============ MAIN WIRING ============ */
 let typeT=null;
-const liveUpdate=()=>{rerenderThumbs();
- if(state.view==='preview')renderPreview();if(state.view==='infinite')renderInfinite()};
-$('txt').addEventListener('input',e=>{state.text=e.target.value;clearTimeout(typeT);
- typeT=setTimeout(liveUpdate,450)});
-$('btnPara').onclick=()=>{const t=$('txt');t.value+='\n';state.text=t.value;t.focus();
- clearTimeout(typeT);typeT=setTimeout(liveUpdate,300)};
 $('btnGen').onclick=()=>{generate(12);buzz(10);toast('✨ +12 designs')};
 $('btnAll').onclick=()=>setPage('all');
 $('btnPattern').onclick=()=>setPage('pattern');
@@ -1091,6 +1309,7 @@ $('moreExist').onclick=()=>{generate(12,'existence');buzz(10);toast('✨ +12 exi
 $('btnInf').onclick=()=>state.infinite?stopInf():startInf();
 $('btnClear').onclick=()=>{if(!confirm('Clear all designs?'))return;
  state.designs=[];Object.values(GRIDS).forEach(id=>$(id).innerHTML='');
+ $('gVoice').innerHTML='';
  state.index=0;updateHeads();setStatus();toast('🗑 Cleared')};
 $('ptBack').onclick=()=>showIndex(state.index-1);
 $('ptNext').onclick=()=>showIndex(state.index+1);
@@ -1112,14 +1331,22 @@ function applySize(){state.W=Math.max(120,+$('inpW').value||1080);state.H=Math.m
  setStatus();toast(state.W+' × '+state.H)}
 $('inpW').onchange=applySize;$('inpH').onchange=applySize;
 $('chips').addEventListener('wheel',e=>{e.preventDefault();$('chips').scrollLeft+=e.deltaY+e.deltaX},{passive:false});
-addEventListener('resize',()=>{if(state.view==='preview')renderPreview();
+addEventListener('resize',()=>{
+ if(state.view==='preview')renderPreview();
  if(state.view==='infinite')renderInfinite();
- if($('edOv').classList.contains('on'))fitCanvasToWorkspace()});
+ if($('edOv').classList.contains('on'))fitCanvasToWorkspace();
+ clampTxtCard();
+});
 document.addEventListener('keydown',e=>{lastActivity=performance.now();
  if($('edOv').classList.contains('on'))return;
  if(e.key==='ArrowRight')showIndex(state.index+1);
  if(e.key==='ArrowLeft')showIndex(state.index-1);
- if(e.key==='Escape'){if(state.view==='preview')setPage(state.pageFilter)}});
+ if(e.key==='Escape'){
+  if($('txtCard').classList.contains('hidden'))$('txtCard').classList.remove('hidden');
+  else if(state.view==='preview')setPage(state.pageFilter);
+  else if(state.view==='voice')closeVoicePage();
+ }
+});
 document.addEventListener('pointerdown',()=>lastActivity=performance.now(),true);
 function setStatus(){
  $('statusL').textContent=(state.pageFilter==='all'?'ALL MAKES':state.pageFilter.toUpperCase())+
@@ -1129,7 +1356,7 @@ function setStatus(){
 
 /* INIT */
 updateHeads();setStatus();generate(12);
-setTimeout(()=>toast('✨ Tap any card → ✎ Edit to open Fabric editor'),700);
+setTimeout(()=>{clampTxtCard();toast('🔍 Text card shown — drag header, resize at ⇲')},500);
 </script>
 </body>
-</html>
+   </html>
